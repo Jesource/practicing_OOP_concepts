@@ -7,7 +7,16 @@ public class Employee {
     private static final double overworkMultiplier = 1.5;
     private static final int minimalHourlyWage = 4;
 
-    //TODO: ask what we should do if incorrect data is given
+/*
+    DONE: ask what we should do if incorrect data is given (throwing exception)
+    TODO: get restrictions from restriction file (like Law object / Labour code)
+    TODO: add tests
+    Notes:
+    checked and unchecked exceptions (read more)
+        checked - expected and code should recover from it (for example 'connection timed out')
+        unchecked - user input mistake
+            runtime exceptions
+*/
 
 
     public Employee(double workHours, double basePayRate) {
@@ -18,10 +27,11 @@ public class Employee {
     private void basePayRateCheck(double basePayRate) {
         if (basePayRate >= minimalHourlyWage) {
             this.basePayRate = basePayRate;
-//            System.out.println("Pay rate is set.");
         } else {
-            System.out.println("Pay rate is not accepted: it is lower than minimal allowed.");
+
             // error action
+//            throw new Exception("Pay Rate Error: it is lower than minimal allowed.");
+            throw new IllegalArgumentException("Pay Rate Error: it is lower than minimal allowed.");
         }
     }
 
@@ -37,11 +47,11 @@ public class Employee {
 
     public void setWorkHours(double workHours) {
         if (workHours > hourLimit || workHours < 0) {
-            System.out.println("Error: incorrect work hours!");
             // error action
+//            throw new Exception("Work Hours Error: incorrect work hours!");
+            throw new IllegalArgumentException("Work Hours Error: incorrect work hours!");
         } else {
             this.workHours = workHours;
-//            System.out.println("Work hours accepted");
             setSalary();
         }
     }
