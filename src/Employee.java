@@ -9,7 +9,6 @@ public class Employee {
     private final EmployeesWorkCalendar workCalendar = new EmployeesWorkCalendar();
 
 
-
     public Employee(double weeklyWorkHours, double wagePerHour, LabourCode labourCode) {
         this.labourCode = labourCode;
         hourlyWageCheck(wagePerHour);
@@ -72,7 +71,6 @@ public class Employee {
 
     private double calculateSalaryForParticularDay(LocalDate day) {
         //TODO need to search for maximum allowed hours per shift (12h in Lithuania) and figure out when overwork starts
-//        double salary = (weeklyWorkHours - overworkHours) * wagePerHour + (overworkHours * labourCode.OverworkMultiplier()) * wagePerHour;
         return salary = workCalendar.getWorkdayRecord(day) * wagePerHour;
     }
 }
