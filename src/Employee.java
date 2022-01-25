@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.YearMonth;
 
 public class Employee {
     private double weeklyWorkHours = 0;
@@ -6,8 +7,18 @@ public class Employee {
     private double wagePerHour = 0;
 
     private final LabourCode labourCode;
-    private final EmployeesWorkCalendar workCalendar = new EmployeesWorkCalendar();
+    public final EmployeesWorkCalendar workCalendar = new EmployeesWorkCalendar();
 
+/*
+    DONE: ask what we should do if incorrect data is given (throwing exception)
+    TODO: get restrictions from restriction file (like Law object / Labour code)
+    TODO: add tests
+    Notes:
+    checked and unchecked exceptions (read more)
+        checked - expected and code should recover from it (for example 'connection timed out')
+        unchecked - user input mistake
+            runtime exceptions
+*/
 
     public Employee(double weeklyWorkHours, double wagePerHour, LabourCode labourCode) {
         this.labourCode = labourCode;
@@ -71,6 +82,18 @@ public class Employee {
 
     private double calculateSalaryForParticularDay(LocalDate day) {
         //TODO need to search for maximum allowed hours per shift (12h in Lithuania) and figure out when overwork starts
+//        System.out.println("recorded hours:" + getWorkdayRecord(day));
         return salary = workCalendar.getWorkdayRecord(day) * wagePerHour;
+    }
+
+    private double calculateSalaryBasedOnHours(int workedHours) {
+        return  workedHours * wagePerHour;
+    }
+
+    public double getSalaryForMonth(int year, int month) {
+        var firstMonthDay = LocalDate.of(year, month, 1);
+        System.out.println("First day is " + firstMonthDay);
+        System.out.println("Worked for " + workCalendar.calculateWorkedHoursPerMonth(firstMonthDay) + " hours");
+        return wagePerHour * workCalendar.calculateWorkedHoursPerMonth(firstMonthDay);
     }
 }
