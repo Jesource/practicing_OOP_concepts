@@ -11,19 +11,9 @@ public class Main {
 
         var labourCode_task1 = new LabourCode(40, 4, 60, 1.5, 12);
 
-
-
         var testEmp = new Employee(40, 10, labourCode_task1);
 
         LocalDate date = LocalDate.of(2022, 12, 22);
-        System.out.println("testEmp worked " + testEmp.getWorkdayRecord(date) + " hours at " + date + " and earned " + testEmp.getSalaryBasedOnADay(date));
-        testEmp.addWorkdayRecord(date, 10);
-        System.out.println("testEmp worked " + testEmp.getWorkdayRecord(date) + " hours at " + date + " and earned " + testEmp.getSalaryBasedOnADay(date));
-        testEmp.addWorkdayRecord(date, 1);
-
-        System.out.println("testEmp worked " + testEmp.getWorkdayRecord(date) + " hours at " + date + " and earned " + testEmp.getSalaryBasedOnADay(date));
-
-
 
         var emp1 = new Employee(41, 4, labourCode_task1);
         System.out.println(resultAsMessage("Emp1 salary test", 166, emp1.getSalary()));

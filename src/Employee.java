@@ -10,7 +10,6 @@ public class Employee {
     public final EmployeesWorkCalendar workCalendar = new EmployeesWorkCalendar();
 
 /*
-    DONE: ask what we should do if incorrect data is given (throwing exception)
     TODO: get restrictions from restriction file (like Law object / Labour code)
     TODO: add tests
     Notes:
