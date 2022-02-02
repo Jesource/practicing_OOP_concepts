@@ -7,7 +7,6 @@ public class EmployeesWorkCalendar {
 
     public void addWorkdayRecord(LocalDate day, double workdayHours) {
         workHoursCalendar.put(day, getWorkdayRecord(day) + workdayHours);
-        //DONE: add support for multiple records per day
     }
 
     public double getWorkdayRecord(LocalDate day) {
@@ -48,7 +47,7 @@ public class EmployeesWorkCalendar {
         var firstMonthDayDate = getFirstDayOfMonth(date);
         var lastMonthDayDate = firstMonthDayDate.plusMonths(1).minusDays(1);
 
-        System.out.println("First day is " + firstMonthDayDate + " and last month day is " + lastMonthDayDate);
+//        System.out.println("First day is " + firstMonthDayDate + " and last month day is " + lastMonthDayDate);
 
         for (LocalDate start = firstMonthDayDate; start.isBefore(lastMonthDayDate.plusDays(1)); start = start.plusDays(1)) {
             workedHours += getWorkdayRecord(start);
@@ -56,5 +55,11 @@ public class EmployeesWorkCalendar {
         }
 
         return workedHours;
+    }
+
+    public void fillWeek(LocalDate date, double hoursPerDay) {
+        for (LocalDate start = date; start.isBefore(date.plusDays(7)); start = start.plusDays(1)) {
+            addWorkdayRecord(start, hoursPerDay);
+        }
     }
 }

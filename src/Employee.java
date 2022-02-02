@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.YearMonth;
 
 public class Employee {
     private double weeklyWorkHours = 0;
@@ -11,7 +10,7 @@ public class Employee {
 
 /*
     TODO: get restrictions from restriction file (like Law object / Labour code)
-    TODO: add tests
+    DONE: add tests
     Notes:
     checked and unchecked exceptions (read more)
         checked - expected and code should recover from it (for example 'connection timed out')
@@ -91,8 +90,12 @@ public class Employee {
 
     public double getSalaryForMonth(int year, int month) {
         var firstMonthDay = LocalDate.of(year, month, 1);
-        System.out.println("First day is " + firstMonthDay);
-        System.out.println("Worked for " + workCalendar.calculateWorkedHoursPerMonth(firstMonthDay) + " hours");
+//        System.out.println("First day is " + firstMonthDay);
+//        System.out.println("Worked for " + workCalendar.calculateWorkedHoursPerMonth(firstMonthDay) + " hours");
         return wagePerHour * workCalendar.calculateWorkedHoursPerMonth(firstMonthDay);
+    }
+
+    public void fillWeek(LocalDate date, double hoursPerDay) {
+        workCalendar.fillWeek(date, hoursPerDay);
     }
 }
