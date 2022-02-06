@@ -29,9 +29,8 @@ public class EmployeesWorkCalendar {
         var firstWeekDate = getFirstDayOfWeek(date);
         int workedHours = 0;
 
-        for (LocalDate start = firstWeekDate; start.isBefore(date.plusDays(5)); start = start.plusDays(1)) {
+        for (LocalDate start = firstWeekDate; start.isBefore(date.plusDays(7)); start = start.plusDays(1)) {
             workedHours += getWorkdayRecord(start);
-//            System.out.println("On " + start.getDayOfWeek() + " (" + start + ") employee worked for " + getWorkdayRecord(start) + " hours, " + workedHours + " hours this week.");
         }
 
         return workedHours;
@@ -47,19 +46,22 @@ public class EmployeesWorkCalendar {
         var firstMonthDayDate = getFirstDayOfMonth(date);
         var lastMonthDayDate = firstMonthDayDate.plusMonths(1).minusDays(1);
 
-//        System.out.println("First day is " + firstMonthDayDate + " and last month day is " + lastMonthDayDate);
-
         for (LocalDate start = firstMonthDayDate; start.isBefore(lastMonthDayDate.plusDays(1)); start = start.plusDays(1)) {
             workedHours += getWorkdayRecord(start);
-//            System.out.println("On " + start + " employee worked for " + getWorkdayRecord(start) + " hours, " + workedHours + " hours this month.");
         }
 
         return workedHours;
     }
 
-    public void fillWeek(LocalDate date, double hoursPerDay) {
+    public void fillWeek7days(LocalDate date, double hoursPerDay, LabourCode labourCode) {
         for (LocalDate start = date; start.isBefore(date.plusDays(7)); start = start.plusDays(1)) {
-            addWorkdayRecord(start, hoursPerDay);
+            if ((getWorkdayRecord(start) + hoursPerDay) > labourCode.maxHoursPerDay()) {
+                throw new IllegalArgumentException("Shift Work Hours Error: trying to insert too much hours per shift! (Inserting: " + (getWorkdayRecord(start) + hoursPerDay)
+                        + "; maximum allowed is: "
+                        + labourCode.maxHoursPerDay() + ")");
+            } else {
+                addWorkdayRecord(start, (hoursPerDay + getWorkdayRecord(start)));
+            }
         }
     }
 }
